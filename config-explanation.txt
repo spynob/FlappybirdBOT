@@ -1,0 +1,81 @@
+# read documentation for missing parts -> https://neat-python.readthedocs.io/en/latest/config_file.html
+
+[NEAT]
+fitness_criterion     = max 		#select the ones with max or min (or mean) fitness for the breeding?(ex if you want precision, it would be the one with the lowest distance to target). still need to think of an example for mean
+fitness_threshold     = 100		#if fitness of a bird reaches 100, we consider it's probably close to perfect
+pop_size              = 20		#how many birds per generation
+reset_on_extinction   = False		#look at documentation, but basically if a specie goes extinct, do we reset it? here it's set to false cause we don't want failling species to respawn
+
+[DefaultGenome]
+# node activation options		
+activation_default      = tanh	# activation function
+activation_mutate_rate  = 0.0		# chance to get a new activation function
+activation_options      = tanh	# activation functions to choose from (if we want it to change)
+
+# node aggregation options
+aggregation_default     = sum		# look at documentation
+aggregation_mutate_rate = 0.0		# look at documentation
+aggregation_options     = sum		# look at documentation
+
+# node bias options
+bias_init_mean          = 0.0		# look at documentation
+bias_init_stdev         = 1.0		# look at documentation
+bias_max_value          = 30.0	# max and min values for inital bias that are randomely defined at first
+bias_min_value          = -30.0	
+bias_mutate_power       = 0.5		# how likely to change between generations
+bias_mutate_rate        = 0.7
+bias_replace_rate       = 0.1
+
+# genome compatibility options
+compatibility_disjoint_coefficient = 1.0
+compatibility_weight_coefficient   = 0.5
+
+# connection add/remove rates		# how likely to add or remove a connection in the network
+conn_add_prob           = 0.5
+conn_delete_prob        = 0.5
+
+# connection enable options
+enabled_default         = True	# all connections are activated by default
+enabled_mutate_rate     = 0.01	# 0.01% chance to deactivate a connection
+
+feed_forward            = True	# type of neural network
+initial_connection      = full	# fully connected layers to start
+	
+# node add/remove rates
+node_add_prob           = 0.2		# chances to add or remove neurons 
+node_delete_prob        = 0.2
+
+# network parameters
+num_hidden              = 0		
+num_inputs              = 3
+num_outputs             = 1
+
+# node response options
+response_init_mean      = 1.0
+response_init_stdev     = 0.0
+response_max_value      = 30.0
+response_min_value      = -30.0
+response_mutate_power   = 0.0
+response_mutate_rate    = 0.0
+response_replace_rate   = 0.0
+
+# connection weight options
+weight_init_mean        = 0.0
+weight_init_stdev       = 1.0
+weight_max_value        = 30
+weight_min_value        = -30
+weight_mutate_power     = 0.5
+weight_mutate_rate      = 0.8
+weight_replace_rate     = 0.1
+
+[DefaultSpeciesSet]
+compatibility_threshold = 3.0
+
+[DefaultStagnation]
+species_fitness_func = max
+max_stagnation       = 20	# max generation with stagnating fitness (ie if 20 generations go by and the fitness has not increased: delete that specie)
+species_elitism      = 2	
+
+[DefaultReproduction]
+elitism            = 2
+survival_threshold = 0.2
